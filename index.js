@@ -10,6 +10,6 @@ app.get('/employees', (req, res) => {
   res.send(employees);
 });
 
-app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+app.use('/', graphqlHTTP({ schema, graphiql: true }));
 
 app.listen(4000);

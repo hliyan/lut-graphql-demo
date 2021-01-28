@@ -1,7 +1,7 @@
 const employees = require('./employees');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
 
-const sdl = `
+const typeDefs = `
 schema {
   query: Query
 }
@@ -18,9 +18,7 @@ type Employee {
 }
 `;
 
-const schema = makeExecutableSchema({
-  typeDefs: sdl,
-  resolvers: {
+const resolvers = {
     Query: {
       employees: () => { return employees; }
     },
@@ -30,7 +28,11 @@ const schema = makeExecutableSchema({
       role: (e) => e.role,
       dateOfBirth:(e) => e.dateOfBirth
     }
-  }
+  };
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
 });
 
 module.exports = schema;
